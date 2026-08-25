@@ -55,7 +55,7 @@ header .mese{text-align:right}
 .sotto b{font-weight:700;color:var(--ink)}
 
 /* selettore vista */
-.viste{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:16px;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden}
+.viste{display:grid;grid-template-columns:1fr 1fr;margin-top:16px;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden}
 .viste button{background:transparent;border:0;padding:11px 8px;cursor:pointer;
   font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 .viste button+button{border-left:1.5px solid var(--ink)}
@@ -84,26 +84,31 @@ header .mese{text-align:right}
 
 /* calendario */
 .calendario{background:var(--slip);border:1.5px solid var(--ink);border-radius:3px;overflow:hidden}
-.barra{display:flex;align-items:center;justify-content:space-between;padding:10px 8px;border-bottom:1.5px solid var(--ink)}
-.barra button{background:transparent;border:0;padding:8px 14px;cursor:pointer;font-size:20px;line-height:1;font-family:var(--mono)}
-.barra .titolo{background:transparent;border:0;cursor:pointer;text-align:center;padding:4px 8px}
+.barra{display:flex;align-items:center;justify-content:space-between;padding:10px 6px;border-bottom:1.5px solid var(--ink)}
+.barra .frec{background:transparent;border:0;padding:8px 12px;cursor:pointer;font-size:20px;line-height:1;font-family:var(--mono)}
+.barra .titolo{background:transparent;border:0;cursor:pointer;text-align:center;padding:4px 6px;flex:1;min-width:0}
 .barra .titolo strong{display:block;font-size:16px;font-weight:800;letter-spacing:-.01em;text-transform:capitalize}
-.barra .titolo span{font-family:var(--mono);font-size:11px;color:var(--soft);letter-spacing:.06em}
-.settimana{display:grid;grid-template-columns:repeat(7,1fr);padding:8px 6px 4px}
-.settimana span{text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
-.griglia{display:grid;grid-template-columns:repeat(7,1fr);padding:0 6px 8px;gap:1px}
-.giorno{background:transparent;border:1.2px solid transparent;border-radius:3px;cursor:pointer;
-  min-height:46px;padding:5px 2px 4px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px}
-.giorno .num{font-family:var(--mono);font-size:14px;line-height:1}
+.barra .titolo span{display:block;font-family:var(--mono);font-size:11px;color:var(--soft);letter-spacing:.04em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barra .titolo b{color:var(--ink);font-weight:700}
+
+.settimana{display:grid;grid-template-columns:repeat(7,1fr);padding:8px 5px 4px}
+.settimana span{text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+.griglia{display:grid;grid-template-columns:repeat(7,1fr);padding:0 5px 8px;gap:2px}
+.giorno{background:transparent;border:1.2px solid transparent;border-radius:3px;cursor:pointer;min-height:58px;
+  padding:3px 2px;display:flex;flex-direction:column;align-items:stretch;gap:2px;overflow:hidden}
+.giorno .num{font-family:var(--mono);font-size:11px;line-height:1.2;text-align:left;padding-left:2px}
 .giorno.fuori{visibility:hidden}
 .giorno.passato .num{color:var(--rule)}
+.giorno.passato .targa{opacity:.4}
 .giorno.corrente{border-color:var(--ink)}
 .giorno.corrente .num{font-weight:700}
 .giorno[aria-pressed="true"]{background:var(--ink)}
 .giorno[aria-pressed="true"] .num{color:var(--slip);font-weight:700}
-.punti{display:flex;gap:2px;height:6px;align-items:center}
-.punti i{width:5px;height:5px;border-radius:50%;display:block}
-.giorno.passato .punti i{opacity:.35}
+.targa{font-family:var(--mono);font-size:8.5px;font-weight:700;line-height:1.5;letter-spacing:-.03em;
+  color:#fff;border-radius:2px;padding:0 1px;overflow:hidden;white-space:nowrap;text-align:center}
+.altri{font-family:var(--mono);font-size:8.5px;line-height:1.4;color:var(--soft);text-align:center}
+.giorno[aria-pressed="true"] .altri{color:var(--rule)}
 
 .dettaglio{border-top:1.5px solid var(--ink);background:#fffdf6}
 .dettaglio .cap{display:flex;justify-content:space-between;align-items:baseline;padding:10px 14px 6px}
@@ -180,7 +185,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ink);outline-off
   <div class="celle" id="celle"></div>
   <div class="sotto">
     <div>All'anno <b id="annuo">0,00 €</b></div>
-    <div>Mese corrente <b id="mese">0,00 €</b></div>
+    <div>Resta da pagare <b id="residuo">0,00 €</b></div>
   </div>
 </section>
 
@@ -193,7 +198,6 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ink);outline-off
   <button role="tab" id="tabCal" aria-selected="false">Calendario</button>
 </div>
 
-<!-- ELENCO -->
 <div id="vistaLista">
   <div class="sezione">
     <span class="eyebrow">In ordine di scadenza</span>
@@ -202,7 +206,6 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ink);outline-off
   <div class="lista" id="lista"></div>
 </div>
 
-<!-- CALENDARIO -->
 <div id="vistaCal" hidden>
   <div class="sezione">
     <span class="eyebrow">Giorni di addebito</span>
@@ -210,12 +213,12 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ink);outline-off
   </div>
   <div class="calendario">
     <div class="barra">
-      <button id="mesePrec" aria-label="Mese precedente">‹</button>
+      <button class="frec" id="mesePrec" aria-label="Mese precedente">‹</button>
       <button class="titolo" id="titoloMese">
         <strong id="meseNome">—</strong>
-        <span id="meseTot">0,00 €</span>
+        <span id="meseTot">—</span>
       </button>
-      <button id="meseSucc" aria-label="Mese successivo">›</button>
+      <button class="frec" id="meseSucc" aria-label="Mese successivo">›</button>
     </div>
     <div class="settimana">
       <span>lun</span><span>mar</span><span>mer</span><span>gio</span><span>ven</span><span>sab</span><span>dom</span>
@@ -244,10 +247,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ink);outline-off
   <div class="presa"></div>
   <h2 id="titoloScheda">Nuovo abbonamento</h2>
   <div class="scorciatoie" id="scorciatoie"></div>
-  <label>
-    <span class="et">Nome</span>
-    <input id="fNome" type="text" placeholder="Netflix" autocomplete="off">
-  </label>
+  <label><span class="et">Nome</span>
+    <input id="fNome" type="text" placeholder="Netflix" autocomplete="off"></label>
   <div class="due">
     <label><span class="et">Importo €</span>
       <input id="fImporto" type="number" inputmode="decimal" step="0.01" min="0" placeholder="12,99"></label>
@@ -327,7 +328,6 @@ function successiva(v){
   return limita(d.getFullYear(), d.getMonth() + (PASSI[v.ciclo]||1), daIso(v.data).getDate());
 }
 
-/* tutte le date di una voce comprese tra due estremi, anche passate */
 function occorrenze(v, da, a){
   var p = String(v.data).split("-").map(Number), Ay = p[0], Am = p[1]-1, Ad = p[2];
   var out = [];
@@ -366,31 +366,55 @@ var AL_MESE = { sett:52/12, mens:1, trim:1/3, sem:1/6, ann:1/12, una:0 };
 var CICLI = { sett:"ogni settimana", mens:"ogni mese", trim:"ogni 3 mesi", sem:"ogni 6 mesi", ann:"ogni anno", una:"una volta" };
 function euro(n){ return n.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2}) + " €"; }
 
+function totaleTra(da, a){
+  var t = 0;
+  dati.forEach(function(v){ t += occorrenze(v, da, a).length * (v.importo||0); });
+  return t;
+}
+function totaleMese(y,m){ return totaleTra(new Date(y,m,1), new Date(y,m+1,0)); }
+function residuoMese(y,m){
+  var t = oggi(), primo = new Date(y,m,1), ultimo = new Date(y,m+1,0);
+  if(t > ultimo) return 0;
+  return totaleTra(t > primo ? t : primo, ultimo);
+}
+
 /* ========== servizi noti ========== */
 var NOTI = [
-  {n:"Netflix",c:"#B23A26",i:12.99,x:"mens"},
-  {n:"Spotify",c:"#2E6B4B",i:10.99,x:"mens"},
-  {n:"Prime",c:"#2C5C8A",i:4.99,x:"mens"},
-  {n:"Disney+",c:"#3B4E9B",i:8.99,x:"mens"},
-  {n:"YouTube Premium",c:"#B23A26",i:11.99,x:"mens"},
-  {n:"iCloud",c:"#6E6D5F",i:2.99,x:"mens"},
-  {n:"DAZN",c:"#17170F",i:34.99,x:"mens"},
-  {n:"Now",c:"#7A3C8C",i:9.99,x:"mens"},
-  {n:"Sky",c:"#2C5C8A",i:29.90,x:"mens"},
-  {n:"ChatGPT",c:"#2E6B4B",i:22.00,x:"mens"},
-  {n:"Adobe",c:"#B23A26",i:12.19,x:"mens"},
-  {n:"Google One",c:"#C08A2E",i:1.99,x:"mens"},
-  {n:"Dominio",c:"#6E6D5F",i:14.90,x:"ann"},
-  {n:"Hosting",c:"#2C5C8A",i:59.00,x:"ann"},
-  {n:"Palestra",c:"#C08A2E",i:35.00,x:"mens"},
-  {n:"Assicurazione",c:"#17170F",i:420.00,x:"ann"}
+  {n:"Netflix",         g:"NETFLIX", c:"#B23A26", i:12.99, x:"mens"},
+  {n:"Spotify",         g:"SPOTIFY", c:"#2E6B4B", i:10.99, x:"mens"},
+  {n:"Prime",           g:"PRIME",   c:"#2C5C8A", i:4.99,  x:"mens"},
+  {n:"Disney+",         g:"DISNEY+", c:"#3B4E9B", i:8.99,  x:"mens"},
+  {n:"YouTube Premium", g:"YOUTUBE", c:"#B23A26", i:11.99, x:"mens"},
+  {n:"iCloud",          g:"ICLOUD",  c:"#6E6D5F", i:2.99,  x:"mens"},
+  {n:"DAZN",            g:"DAZN",    c:"#17170F", i:34.99, x:"mens"},
+  {n:"Now",             g:"NOW",     c:"#7A3C8C", i:9.99,  x:"mens"},
+  {n:"Sky",             g:"SKY",     c:"#2C5C8A", i:29.90, x:"mens"},
+  {n:"ChatGPT",         g:"CHATGPT", c:"#2E6B4B", i:22.00, x:"mens"},
+  {n:"Adobe",           g:"ADOBE",   c:"#B23A26", i:12.19, x:"mens"},
+  {n:"Google One",      g:"GOOGLE",  c:"#C08A2E", i:1.99,  x:"mens"},
+  {n:"Dominio",         g:"DOMINIO", c:"#6E6D5F", i:14.90, x:"ann"},
+  {n:"Hosting",         g:"HOSTING", c:"#2C5C8A", i:59.00, x:"ann"},
+  {n:"Palestra",        g:"PALESTRA",c:"#C08A2E", i:35.00, x:"mens"},
+  {n:"Assicurazione",   g:"ASSICUR", c:"#17170F", i:420.00,x:"ann"}
 ];
 var TAVOLOZZA = ["#B23A26","#2E6B4B","#2C5C8A","#C08A2E","#7A3C8C","#17170F","#6E6D5F","#3B4E9B"];
-function coloreDa(nome){
+
+function noto(nome){
   var t = nome.trim().toLowerCase();
-  for(var i=0;i<NOTI.length;i++) if(NOTI[i].n.toLowerCase() === t) return NOTI[i].c;
-  var s = 0; for(var j=0;j<nome.length;j++) s += nome.charCodeAt(j);
-  return TAVOLOZZA[s % TAVOLOZZA.length];
+  for(var i=0;i<NOTI.length;i++) if(NOTI[i].n.toLowerCase() === t) return NOTI[i];
+  return null;
+}
+function coloreDa(nome){
+  var s = noto(nome);
+  if(s) return s.c;
+  var k = 0; for(var j=0;j<nome.length;j++) k += nome.charCodeAt(j);
+  return TAVOLOZZA[k % TAVOLOZZA.length];
+}
+function targaDa(nome){
+  var s = noto(nome);
+  if(s) return s.g;
+  var pulito = nome.trim().split(/\s+/)[0].replace(/[^0-9A-Za-zÀ-ÿ+]/g,"").toUpperCase();
+  return pulito.slice(0,7) || "?";
 }
 
 /* ========== stato ========== */
@@ -419,14 +443,8 @@ function disegnaTotale(){
   celle.appendChild(eur);
 
   document.getElementById("annuo").textContent = euro(alMese*12);
+  document.getElementById("residuo").textContent = euro(residuoMese(oggi().getFullYear(), oggi().getMonth()));
   document.getElementById("conta").textContent = dati.length + (dati.length === 1 ? " voce" : " voci");
-  document.getElementById("mese").textContent = euro(totaleMese(oggi().getFullYear(), oggi().getMonth()));
-}
-
-function totaleMese(y,m){
-  var da = new Date(y,m,1), a = new Date(y,m+1,0), t = 0;
-  dati.forEach(function(v){ t += occorrenze(v,da,a).length * (v.importo||0); });
-  return t;
 }
 
 /* ========== elenco ========== */
@@ -436,20 +454,17 @@ function rigaVoce(v, d, conGiorni){
   b.className = "riga" + (conGiorni && gg <= 3 && gg >= 0 ? " urgente" : "");
 
   var meta;
-  if(!conGiorni){
-    meta = CICLI[v.ciclo] + (v.metodo ? " · " + v.metodo : "");
-  } else if(gg === 0){ meta = dataBreve(d) + ' · <span class="oggi">OGGI</span>'; }
+  if(!conGiorni){ meta = CICLI[v.ciclo] + (v.metodo ? " · " + v.metodo : ""); }
+  else if(gg === 0){ meta = dataBreve(d) + ' · <span class="oggi">OGGI</span>'; }
   else if(gg === 1){ meta = dataBreve(d) + ' · <span class="gg">domani</span>'; }
   else if(gg <= 3){ meta = dataBreve(d) + ' · <span class="gg">tra ' + gg + ' gg</span>'; }
   else { meta = dataBreve(d) + " · tra " + gg + " gg"; }
 
   b.innerHTML =
     '<span class="sigla" style="color:'+coloreDa(v.nome)+';background:'+coloreDa(v.nome)+'14">'+
-      v.nome.trim().charAt(0).toUpperCase()+
-    '</span>'+
+      v.nome.trim().charAt(0).toUpperCase()+'</span>'+
     '<span><span class="nome"></span><span class="meta">'+meta+'</span></span>'+
-    '<span class="cifra">'+euro(v.importo||0)+
-      (conGiorni ? '<small>'+CICLI[v.ciclo]+'</small>' : '')+'</span>';
+    '<span class="cifra">'+euro(v.importo||0)+(conGiorni ? '<small>'+CICLI[v.ciclo]+'</small>' : '')+'</span>';
 
   b.querySelector(".nome").textContent = v.nome;
   b.addEventListener("click", function(){ apri(v.id); });
@@ -471,14 +486,24 @@ function disegnaLista(){
 /* ========== calendario ========== */
 function disegnaCalendario(){
   var y = cursore.y, m = cursore.m;
+  var t = oggi();
+  var corrente = (y === t.getFullYear() && m === t.getMonth());
+  var trascorso = (y < t.getFullYear() || (y === t.getFullYear() && m < t.getMonth()));
+
   document.getElementById("meseNome").textContent = MESI[m] + " " + y;
-  document.getElementById("meseTot").textContent = euro(totaleMese(y,m));
+  var tot = document.getElementById("meseTot");
+  if(corrente){
+    tot.innerHTML = 'da oggi a fine mese <b>' + euro(residuoMese(y,m)) + '</b>';
+  } else if(trascorso){
+    tot.innerHTML = 'pagato nel mese <b>' + euro(totaleMese(y,m)) + '</b>';
+  } else {
+    tot.innerHTML = 'totale del mese <b>' + euro(totaleMese(y,m)) + '</b>';
+  }
 
   var primo = new Date(y,m,1), ultimo = new Date(y,m+1,0);
   var quanti = ultimo.getDate();
-  var offset = (primo.getDay() + 6) % 7;   // lunedì = 0
+  var offset = (primo.getDay() + 6) % 7;
 
-  /* mappa giorno → voci */
   var mappa = {};
   dati.forEach(function(v){
     occorrenze(v, primo, ultimo).forEach(function(d){
@@ -496,7 +521,6 @@ function disegnaCalendario(){
     griglia.appendChild(vuota);
   }
 
-  var t = oggi();
   for(var g=1; g<=quanti; g++){
     (function(g){
       var d = new Date(y,m,g);
@@ -504,13 +528,16 @@ function disegnaCalendario(){
       var b = document.createElement("button");
       b.className = "giorno" + (d < t ? " passato" : "") + (d.getTime() === t.getTime() ? " corrente" : "");
       b.setAttribute("aria-pressed", scelto === iso(d) ? "true" : "false");
-      b.setAttribute("aria-label", g + " " + MESI[m] + (voci.length ? ", " + voci.length + " pagamenti" : ""));
+      b.setAttribute("aria-label", g + " " + MESI[m] +
+        (voci.length ? ", " + voci.map(function(v){ return v.nome; }).join(", ") : ""));
 
-      var punti = voci.slice(0,3).map(function(v){
-        return '<i style="background:'+coloreDa(v.nome)+'"></i>';
-      }).join("");
+      var html = '<span class="num">' + g + '</span>';
+      voci.slice(0,2).forEach(function(v){
+        html += '<span class="targa" style="background:'+coloreDa(v.nome)+'">'+targaDa(v.nome)+'</span>';
+      });
+      if(voci.length > 2) html += '<span class="altri">+'+(voci.length-2)+'</span>';
 
-      b.innerHTML = '<span class="num">'+g+'</span><span class="punti">'+punti+'</span>';
+      b.innerHTML = html;
       b.addEventListener("click", function(){
         scelto = (scelto === iso(d)) ? null : iso(d);
         disegnaCalendario();
@@ -533,8 +560,8 @@ function disegnaDettaglio(mappa){
 
   var cap = document.createElement("div");
   cap.className = "cap";
-  cap.innerHTML = '<span class="eyebrow">'+dataLunga(d)+'</span>'+
-    '<span class="eyebrow">'+(voci.length ? euro(voci.reduce(function(s,v){ return s+(v.importo||0); },0)) : "")+'</span>';
+  cap.innerHTML = '<span class="eyebrow">'+dataLunga(d)+'</span><span class="eyebrow">'+
+    (voci.length ? euro(voci.reduce(function(s,v){ return s+(v.importo||0); },0)) : "")+'</span>';
   box.appendChild(cap);
 
   if(!voci.length){
@@ -549,11 +576,10 @@ function disegnaDettaglio(mappa){
 
 function cambiaMese(n){
   var d = new Date(cursore.y, cursore.m + n, 1);
-  cursore = { y: d.getFullYear(), m: d.getMonth() };
+  cursore = { y:d.getFullYear(), m:d.getMonth() };
   scelto = null;
   disegnaCalendario();
 }
-
 document.getElementById("mesePrec").addEventListener("click", function(){ cambiaMese(-1); });
 document.getElementById("meseSucc").addEventListener("click", function(){ cambiaMese(1); });
 document.getElementById("titoloMese").addEventListener("click", function(){
