@@ -29,140 +29,136 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
 body{
-  background:var(--carta);
-  color:var(--ink);
-  font-family:var(--display);
-  font-size:16px;
-  line-height:1.4;
+  background:var(--carta);color:var(--ink);font-family:var(--display);
+  font-size:16px;line-height:1.4;
   padding:0 14px calc(96px + env(safe-area-inset-bottom));
-  max-width:560px;margin:0 auto;
-  -webkit-font-smoothing:antialiased;
+  max-width:560px;margin:0 auto;-webkit-font-smoothing:antialiased;
 }
 button,input,select,textarea{font:inherit;color:inherit}
-.eyebrow{
-  font-family:var(--mono);font-size:11px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--soft);
-}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
 
-/* ---------- testata ---------- */
 header{padding:calc(20px + env(safe-area-inset-top)) 2px 14px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
 h1{font-size:26px;font-weight:800;letter-spacing:-.02em;margin:0;line-height:1}
 header .mese{text-align:right}
 
-/* ---------- matrice / totale ---------- */
-.matrice{
-  background:var(--slip);border:1.5px solid var(--ink);border-radius:3px;
-  padding:14px 14px 16px;position:relative;overflow:hidden;
-}
-.matrice::after{
-  content:"";position:absolute;inset:5px;border:1px solid var(--rule);border-radius:2px;pointer-events:none;
-}
+/* matrice */
+.matrice{background:var(--slip);border:1.5px solid var(--ink);border-radius:3px;padding:14px 14px 16px;position:relative;overflow:hidden}
+.matrice::after{content:"";position:absolute;inset:5px;border:1px solid var(--rule);border-radius:2px;pointer-events:none}
 .matrice .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
 .celle{display:flex;gap:4px;align-items:stretch}
-.cella{
-  flex:0 0 auto;width:30px;height:44px;border:1.2px solid var(--ink);border-radius:2px;
-  background:#fffdf6;display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);font-weight:700;font-size:24px;line-height:1;
-}
+.cella{flex:0 0 auto;width:30px;height:44px;border:1.2px solid var(--ink);border-radius:2px;background:#fffdf6;
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:24px;line-height:1}
 .cella.sep{width:14px;border:none;background:transparent;align-items:flex-end;padding-bottom:6px}
 .cella.eur{width:auto;border:none;background:transparent;font-size:15px;color:var(--soft);align-items:flex-end;padding:0 0 8px 4px}
 .sotto{display:flex;gap:16px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--rule)}
 .sotto div{font-family:var(--mono);font-size:12px;color:var(--soft)}
 .sotto b{font-weight:700;color:var(--ink)}
 
-/* ---------- lista ---------- */
-.sezione{display:flex;align-items:center;gap:10px;margin:26px 2px 8px}
+/* selettore vista */
+.viste{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:16px;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden}
+.viste button{background:transparent;border:0;padding:11px 8px;cursor:pointer;
+  font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.viste button+button{border-left:1.5px solid var(--ink)}
+.viste button[aria-selected="true"]{background:var(--ink);color:var(--slip)}
+
+.sezione{display:flex;align-items:center;gap:10px;margin:22px 2px 8px}
 .sezione .linea{flex:1;height:1px;background:var(--rule)}
+
+/* lista */
 .lista{background:var(--slip);border:1.5px solid var(--ink);border-radius:3px}
-.riga{
-  display:grid;grid-template-columns:38px 1fr auto;gap:12px;align-items:center;
-  width:100%;text-align:left;background:none;border:0;padding:13px 14px;cursor:pointer;
-  border-left:3px solid transparent;
-}
+.riga{display:grid;grid-template-columns:38px 1fr auto;gap:12px;align-items:center;width:100%;text-align:left;
+  background:none;border:0;padding:13px 14px;cursor:pointer;border-left:3px solid transparent}
 .riga+.riga{border-top:1px dashed var(--rule)}
 .riga.urgente{border-left-color:var(--stamp);background:linear-gradient(90deg,rgba(178,58,38,.05),transparent 60%)}
-.sigla{
-  width:38px;height:38px;border-radius:3px;display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);font-weight:700;font-size:15px;border:1.2px solid currentColor;
-}
+.sigla{width:38px;height:38px;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-weight:700;font-size:15px;border:1.2px solid currentColor}
 .nome{font-weight:700;font-size:16px;letter-spacing:-.01em;display:block}
 .meta{font-family:var(--mono);font-size:12px;color:var(--soft);margin-top:2px}
 .meta .gg{color:var(--stamp);font-weight:700}
 .meta .oggi{background:var(--stamp);color:var(--slip);padding:1px 5px;border-radius:2px;font-weight:700}
 .cifra{font-family:var(--mono);font-weight:700;font-size:16px;white-space:nowrap;text-align:right}
 .cifra small{display:block;font-weight:400;font-size:11px;color:var(--soft);letter-spacing:.04em}
-
 .vuoto{padding:34px 20px;text-align:center}
 .vuoto p{margin:0 0 4px;font-weight:700}
 .vuoto span{font-family:var(--mono);font-size:13px;color:var(--soft)}
 
-/* ---------- strumenti ---------- */
+/* calendario */
+.calendario{background:var(--slip);border:1.5px solid var(--ink);border-radius:3px;overflow:hidden}
+.barra{display:flex;align-items:center;justify-content:space-between;padding:10px 8px;border-bottom:1.5px solid var(--ink)}
+.barra button{background:transparent;border:0;padding:8px 14px;cursor:pointer;font-size:20px;line-height:1;font-family:var(--mono)}
+.barra .titolo{background:transparent;border:0;cursor:pointer;text-align:center;padding:4px 8px}
+.barra .titolo strong{display:block;font-size:16px;font-weight:800;letter-spacing:-.01em;text-transform:capitalize}
+.barra .titolo span{font-family:var(--mono);font-size:11px;color:var(--soft);letter-spacing:.06em}
+.settimana{display:grid;grid-template-columns:repeat(7,1fr);padding:8px 6px 4px}
+.settimana span{text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.griglia{display:grid;grid-template-columns:repeat(7,1fr);padding:0 6px 8px;gap:1px}
+.giorno{background:transparent;border:1.2px solid transparent;border-radius:3px;cursor:pointer;
+  min-height:46px;padding:5px 2px 4px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px}
+.giorno .num{font-family:var(--mono);font-size:14px;line-height:1}
+.giorno.fuori{visibility:hidden}
+.giorno.passato .num{color:var(--rule)}
+.giorno.corrente{border-color:var(--ink)}
+.giorno.corrente .num{font-weight:700}
+.giorno[aria-pressed="true"]{background:var(--ink)}
+.giorno[aria-pressed="true"] .num{color:var(--slip);font-weight:700}
+.punti{display:flex;gap:2px;height:6px;align-items:center}
+.punti i{width:5px;height:5px;border-radius:50%;display:block}
+.giorno.passato .punti i{opacity:.35}
+
+.dettaglio{border-top:1.5px solid var(--ink);background:#fffdf6}
+.dettaglio .cap{display:flex;justify-content:space-between;align-items:baseline;padding:10px 14px 6px}
+.dettaglio .riga{padding:10px 14px}
+.dettaglio .vuoto{padding:18px 14px;text-align:left}
+
+/* strumenti */
 .attrezzi{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.attrezzi button{
-  background:transparent;border:1.2px solid var(--rule);border-radius:3px;padding:11px 8px;
-  font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
-}
+.attrezzi button{background:transparent;border:1.2px solid var(--rule);border-radius:3px;padding:11px 8px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
 .attrezzi button:active{background:var(--slip)}
 .attrezzi .largo{grid-column:1/-1}
 .nota{font-family:var(--mono);font-size:11px;color:var(--soft);margin:14px 2px 0;line-height:1.6}
 
-/* ---------- fab ---------- */
-.fab{
-  position:fixed;left:50%;transform:translateX(-50%);
-  bottom:calc(18px + env(safe-area-inset-bottom));
-  background:var(--ink);color:var(--slip);border:0;border-radius:40px;
-  padding:15px 26px;font-weight:700;font-size:15px;letter-spacing:.01em;cursor:pointer;
-  box-shadow:0 6px 20px rgba(23,23,15,.28);z-index:40;
-}
+.fab{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom));
+  background:var(--ink);color:var(--slip);border:0;border-radius:40px;padding:15px 26px;font-weight:700;font-size:15px;
+  cursor:pointer;box-shadow:0 6px 20px rgba(23,23,15,.28);z-index:40}
 .fab:active{transform:translateX(-50%) scale(.97)}
 
-/* ---------- scheda ---------- */
 .velo{position:fixed;inset:0;background:rgba(23,23,15,.45);z-index:50;display:none}
 .velo.on{display:block}
-.scheda{
-  position:fixed;left:0;right:0;bottom:0;z-index:60;max-width:560px;margin:0 auto;
-  background:var(--slip);border:1.5px solid var(--ink);border-bottom:0;
-  border-radius:10px 10px 0 0;padding:8px 16px calc(20px + env(safe-area-inset-bottom));
-  max-height:92vh;overflow-y:auto;transform:translateY(101%);transition:transform .22s ease;
-}
+.scheda{position:fixed;left:0;right:0;bottom:0;z-index:60;max-width:560px;margin:0 auto;background:var(--slip);
+  border:1.5px solid var(--ink);border-bottom:0;border-radius:10px 10px 0 0;
+  padding:8px 16px calc(20px + env(safe-area-inset-bottom));max-height:92vh;overflow-y:auto;
+  transform:translateY(101%);transition:transform .22s ease}
 .scheda.on{transform:translateY(0)}
 .presa{width:44px;height:4px;background:var(--rule);border-radius:2px;margin:6px auto 14px}
 .scheda h2{font-size:19px;margin:0 0 14px;font-weight:800}
 label{display:block;margin-bottom:12px}
 label .et{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);display:block;margin-bottom:5px}
-input,select,textarea{
-  width:100%;background:#fffdf6;border:1.2px solid var(--rule);border-radius:3px;
-  padding:12px;font-size:16px;font-family:var(--mono);
-}
+input,select,textarea{width:100%;background:#fffdf6;border:1.2px solid var(--rule);border-radius:3px;padding:12px;font-size:16px;font-family:var(--mono)}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--ink);outline-offset:1px;border-color:var(--ink)}
 .due{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .scorciatoie{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;-webkit-overflow-scrolling:touch}
-.scorciatoie button{
-  flex:0 0 auto;background:transparent;border:1.2px solid var(--rule);border-radius:20px;
-  padding:7px 13px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;
-}
+.scorciatoie button{flex:0 0 auto;background:transparent;border:1.2px solid var(--rule);border-radius:20px;
+  padding:7px 13px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
 .azioni{display:flex;gap:8px;margin-top:6px}
 .azioni button{flex:1;border-radius:3px;padding:14px;font-weight:700;font-size:15px;cursor:pointer;border:1.5px solid var(--ink)}
 .primario{background:var(--ink);color:var(--slip)}
 .secondario{background:transparent}
 .elimina{width:100%;margin-top:10px;background:transparent;border:0;color:var(--stamp);
   font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px;cursor:pointer}
-.paga{width:100%;margin-top:10px;background:transparent;border:1.2px dashed var(--verde);color:var(--verde);
-  border-radius:3px;padding:13px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.paga{width:100%;margin-top:10px;background:transparent;border:1.2px dashed var(--verde);color:var(--verde);border-radius:3px;
+  padding:13px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
 
-.avviso{
-  background:var(--evid);border:1.2px solid var(--ink);border-radius:3px;padding:10px 12px;
-  font-family:var(--mono);font-size:12px;line-height:1.5;margin-top:12px;display:none;
-}
+.avviso{background:var(--evid);border:1.2px solid var(--ink);border-radius:3px;padding:10px 12px;
+  font-family:var(--mono);font-size:12px;line-height:1.5;margin-top:12px;display:none}
 .avviso.on{display:block}
 
-.toast{
-  position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(10px);
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(10px);
   background:var(--ink);color:var(--slip);padding:11px 18px;border-radius:3px;font-family:var(--mono);font-size:13px;
-  opacity:0;pointer-events:none;transition:.2s;z-index:70;white-space:nowrap;
-}
+  opacity:0;pointer-events:none;transition:.2s;z-index:70;white-space:nowrap}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
+[hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -173,9 +169,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ink);outline-off
     <div class="eyebrow">Abbonamenti ricorrenti</div>
     <h1>Scadenze</h1>
   </div>
-  <div class="mese">
-    <div class="eyebrow" id="oggiEt">—</div>
-  </div>
+  <div class="mese"><div class="eyebrow" id="oggiEt">—</div></div>
 </header>
 
 <section class="matrice">
@@ -186,21 +180,50 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ink);outline-off
   <div class="celle" id="celle"></div>
   <div class="sotto">
     <div>All'anno <b id="annuo">0,00 €</b></div>
-    <div>Questo mese <b id="mese">0,00 €</b></div>
+    <div>Mese corrente <b id="mese">0,00 €</b></div>
   </div>
 </section>
 
 <div class="avviso" id="avviso">
   Questo browser non salva i dati in locale: le voci restano solo finché la pagina è aperta.
-  Scarica il file e aprilo dal tuo dominio o dalla schermata home.
 </div>
 
-<div class="sezione">
-  <span class="eyebrow">In ordine di scadenza</span>
-  <span class="linea"></span>
+<div class="viste" role="tablist">
+  <button role="tab" id="tabLista" aria-selected="true">Elenco</button>
+  <button role="tab" id="tabCal" aria-selected="false">Calendario</button>
 </div>
 
-<div class="lista" id="lista"></div>
+<!-- ELENCO -->
+<div id="vistaLista">
+  <div class="sezione">
+    <span class="eyebrow">In ordine di scadenza</span>
+    <span class="linea"></span>
+  </div>
+  <div class="lista" id="lista"></div>
+</div>
+
+<!-- CALENDARIO -->
+<div id="vistaCal" hidden>
+  <div class="sezione">
+    <span class="eyebrow">Giorni di addebito</span>
+    <span class="linea"></span>
+  </div>
+  <div class="calendario">
+    <div class="barra">
+      <button id="mesePrec" aria-label="Mese precedente">‹</button>
+      <button class="titolo" id="titoloMese">
+        <strong id="meseNome">—</strong>
+        <span id="meseTot">0,00 €</span>
+      </button>
+      <button id="meseSucc" aria-label="Mese successivo">›</button>
+    </div>
+    <div class="settimana">
+      <span>lun</span><span>mar</span><span>mer</span><span>gio</span><span>ven</span><span>sab</span><span>dom</span>
+    </div>
+    <div class="griglia" id="griglia"></div>
+    <div class="dettaglio" id="dettaglio" hidden></div>
+  </div>
+</div>
 
 <div class="attrezzi">
   <button id="btnIcs">Metti in calendario</button>
@@ -210,8 +233,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ink);outline-off
 </div>
 
 <p class="nota">
-  “Metti in calendario” scarica un file .ics con un evento ricorrente per ogni voce e una sveglia
-  il giorno prima alle 9:00. Aprilo e il calendario del telefono penserà agli avvisi.
+  Il calendario qui dentro serve a guardare. Per farti avvisare davvero usa “Metti in calendario”:
+  scarica un .ics con un evento ricorrente per ogni voce e una sveglia il giorno prima alle 9:00.
 </p>
 
 <button class="fab" id="btnNuovo">+ Aggiungi abbonamento</button>
@@ -220,21 +243,15 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ink);outline-off
 <div class="scheda" id="scheda" role="dialog" aria-modal="true" aria-labelledby="titoloScheda">
   <div class="presa"></div>
   <h2 id="titoloScheda">Nuovo abbonamento</h2>
-
   <div class="scorciatoie" id="scorciatoie"></div>
-
   <label>
     <span class="et">Nome</span>
     <input id="fNome" type="text" placeholder="Netflix" autocomplete="off">
   </label>
-
   <div class="due">
-    <label>
-      <span class="et">Importo €</span>
-      <input id="fImporto" type="number" inputmode="decimal" step="0.01" min="0" placeholder="12,99">
-    </label>
-    <label>
-      <span class="et">Ogni</span>
+    <label><span class="et">Importo €</span>
+      <input id="fImporto" type="number" inputmode="decimal" step="0.01" min="0" placeholder="12,99"></label>
+    <label><span class="et">Ogni</span>
       <select id="fCiclo">
         <option value="sett">Settimana</option>
         <option value="mens" selected>Mese</option>
@@ -242,26 +259,14 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--ink);outline-off
         <option value="sem">6 mesi</option>
         <option value="ann">Anno</option>
         <option value="una">Una volta sola</option>
-      </select>
-    </label>
+      </select></label>
   </div>
-
   <div class="due">
-    <label>
-      <span class="et">Prossimo pagamento</span>
-      <input id="fData" type="date">
-    </label>
-    <label>
-      <span class="et">Pagato con</span>
-      <input id="fMetodo" type="text" placeholder="Carta ...4821" autocomplete="off">
-    </label>
+    <label><span class="et">Prossimo pagamento</span><input id="fData" type="date"></label>
+    <label><span class="et">Pagato con</span><input id="fMetodo" type="text" placeholder="Carta ...4821" autocomplete="off"></label>
   </div>
-
-  <label>
-    <span class="et">Nota</span>
-    <input id="fNota" type="text" placeholder="Piano famiglia, disdicibile a marzo" autocomplete="off">
-  </label>
-
+  <label><span class="et">Nota</span>
+    <input id="fNota" type="text" placeholder="Piano famiglia, disdicibile a marzo" autocomplete="off"></label>
   <div class="azioni">
     <button class="secondario" id="btnAnnulla">Annulla</button>
     <button class="primario" id="btnSalva">Salva</button>
@@ -281,37 +286,29 @@ var KEY = "scadenze.v1";
 var memoria = null, persiste = true;
 
 function carica(){
-  try{
-    var g = localStorage.getItem(KEY);
-    return g ? JSON.parse(g) : [];
-  }catch(e){
-    persiste = false;
-    return memoria || [];
-  }
+  try{ var g = localStorage.getItem(KEY); return g ? JSON.parse(g) : []; }
+  catch(e){ persiste = false; return memoria || []; }
 }
 function salva(){
-  try{
-    localStorage.setItem(KEY, JSON.stringify(dati));
-  }catch(e){
-    persiste = false;
-    memoria = dati;
-    document.getElementById("avviso").classList.add("on");
-  }
+  try{ localStorage.setItem(KEY, JSON.stringify(dati)); }
+  catch(e){ persiste = false; memoria = dati; document.getElementById("avviso").classList.add("on"); }
 }
 
 /* ========== date ========== */
 function oggi(){ var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
-function iso(d){
-  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
-}
+function iso(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
 function daIso(s){ var p = String(s).split("-").map(Number); return new Date(p[0], p[1]-1, p[2]); }
 function limita(y,m,g){ var ultimo = new Date(y, m+1, 0).getDate(); return new Date(y, m, Math.min(g, ultimo)); }
+function giorniA(d){ return Math.round((d - oggi()) / 86400000); }
 
 var PASSI = { mens:1, trim:3, sem:6, ann:12 };
+var MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+var GIORNI = ["dom","lun","mar","mer","gio","ven","sab"];
+function dataBreve(d){ return GIORNI[d.getDay()]+" "+d.getDate()+" "+MESI[d.getMonth()].slice(0,3); }
+function dataLunga(d){ return d.getDate()+" "+MESI[d.getMonth()]; }
 
 function prossima(v){
-  var p = String(v.data).split("-").map(Number);
-  var y = p[0], m = p[1]-1, g = p[2];
+  var p = String(v.data).split("-").map(Number), y = p[0], m = p[1]-1, g = p[2];
   var t = oggi(), cur = new Date(y, m, g);
   if(v.ciclo === "una") return cur;
   if(v.ciclo === "sett"){
@@ -327,41 +324,66 @@ function successiva(v){
   var d = prossima(v);
   if(v.ciclo === "una") return d;
   if(v.ciclo === "sett") return new Date(d.getFullYear(), d.getMonth(), d.getDate()+7);
-  var g = daIso(v.data).getDate();
-  return limita(d.getFullYear(), d.getMonth() + (PASSI[v.ciclo]||1), g);
+  return limita(d.getFullYear(), d.getMonth() + (PASSI[v.ciclo]||1), daIso(v.data).getDate());
 }
-function giorniA(d){ return Math.round((d - oggi()) / 86400000); }
 
-var MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
-var GIORNI = ["dom","lun","mar","mer","gio","ven","sab"];
-function dataBreve(d){ return GIORNI[d.getDay()] + " " + d.getDate() + " " + MESI[d.getMonth()].slice(0,3); }
+/* tutte le date di una voce comprese tra due estremi, anche passate */
+function occorrenze(v, da, a){
+  var p = String(v.data).split("-").map(Number), Ay = p[0], Am = p[1]-1, Ad = p[2];
+  var out = [];
+  if(v.ciclo === "una"){
+    var u = new Date(Ay, Am, Ad);
+    if(u >= da && u <= a) out.push(u);
+    return out;
+  }
+  if(v.ciclo === "sett"){
+    var anc = new Date(Ay, Am, Ad);
+    var k = Math.ceil((da - anc) / 604800000);
+    var cur = new Date(anc.getFullYear(), anc.getMonth(), anc.getDate() + k*7);
+    var g = 0;
+    while(cur <= a && g++ < 400){
+      if(cur >= da) out.push(new Date(cur.getTime()));
+      cur = new Date(cur.getFullYear(), cur.getMonth(), cur.getDate()+7);
+    }
+    return out;
+  }
+  var n = PASSI[v.ciclo] || 1;
+  var cy = da.getFullYear(), cm = da.getMonth();
+  var fy = a.getFullYear(), fm = a.getMonth(), guardia = 0;
+  while((cy < fy || (cy === fy && cm <= fm)) && guardia++ < 400){
+    var diff = (cy - Ay)*12 + (cm - Am);
+    if(((diff % n) + n) % n === 0){
+      var d = limita(cy, cm, Ad);
+      if(d >= da && d <= a) out.push(d);
+    }
+    cm++; if(cm > 11){ cm = 0; cy++; }
+  }
+  return out;
+}
 
 /* ========== soldi ========== */
 var AL_MESE = { sett:52/12, mens:1, trim:1/3, sem:1/6, ann:1/12, una:0 };
 var CICLI = { sett:"ogni settimana", mens:"ogni mese", trim:"ogni 3 mesi", sem:"ogni 6 mesi", ann:"ogni anno", una:"una volta" };
-
-function euro(n){
-  return n.toLocaleString("it-IT", {minimumFractionDigits:2, maximumFractionDigits:2}) + " €";
-}
+function euro(n){ return n.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2}) + " €"; }
 
 /* ========== servizi noti ========== */
 var NOTI = [
-  {n:"Netflix",       c:"#B23A26", i:12.99, x:"mens"},
-  {n:"Spotify",       c:"#2E6B4B", i:10.99, x:"mens"},
-  {n:"Prime",         c:"#2C5C8A", i:4.99,  x:"mens"},
-  {n:"Disney+",       c:"#3B4E9B", i:8.99,  x:"mens"},
-  {n:"YouTube Premium", c:"#B23A26", i:11.99, x:"mens"},
-  {n:"iCloud",        c:"#6E6D5F", i:2.99,  x:"mens"},
-  {n:"DAZN",          c:"#17170F", i:34.99, x:"mens"},
-  {n:"Now",           c:"#7A3C8C", i:9.99,  x:"mens"},
-  {n:"Sky",           c:"#2C5C8A", i:29.90, x:"mens"},
-  {n:"ChatGPT",       c:"#2E6B4B", i:22.00, x:"mens"},
-  {n:"Adobe",         c:"#B23A26", i:12.19, x:"mens"},
-  {n:"Google One",    c:"#C08A2E", i:1.99,  x:"mens"},
-  {n:"Dominio",       c:"#6E6D5F", i:14.90, x:"ann"},
-  {n:"Hosting",       c:"#2C5C8A", i:59.00, x:"ann"},
-  {n:"Palestra",      c:"#C08A2E", i:35.00, x:"mens"},
-  {n:"Assicurazione", c:"#17170F", i:420.00, x:"ann"}
+  {n:"Netflix",c:"#B23A26",i:12.99,x:"mens"},
+  {n:"Spotify",c:"#2E6B4B",i:10.99,x:"mens"},
+  {n:"Prime",c:"#2C5C8A",i:4.99,x:"mens"},
+  {n:"Disney+",c:"#3B4E9B",i:8.99,x:"mens"},
+  {n:"YouTube Premium",c:"#B23A26",i:11.99,x:"mens"},
+  {n:"iCloud",c:"#6E6D5F",i:2.99,x:"mens"},
+  {n:"DAZN",c:"#17170F",i:34.99,x:"mens"},
+  {n:"Now",c:"#7A3C8C",i:9.99,x:"mens"},
+  {n:"Sky",c:"#2C5C8A",i:29.90,x:"mens"},
+  {n:"ChatGPT",c:"#2E6B4B",i:22.00,x:"mens"},
+  {n:"Adobe",c:"#B23A26",i:12.19,x:"mens"},
+  {n:"Google One",c:"#C08A2E",i:1.99,x:"mens"},
+  {n:"Dominio",c:"#6E6D5F",i:14.90,x:"ann"},
+  {n:"Hosting",c:"#2C5C8A",i:59.00,x:"ann"},
+  {n:"Palestra",c:"#C08A2E",i:35.00,x:"mens"},
+  {n:"Assicurazione",c:"#17170F",i:420.00,x:"ann"}
 ];
 var TAVOLOZZA = ["#B23A26","#2E6B4B","#2C5C8A","#C08A2E","#7A3C8C","#17170F","#6E6D5F","#3B4E9B"];
 function coloreDa(nome){
@@ -374,13 +396,16 @@ function coloreDa(nome){
 /* ========== stato ========== */
 var dati = carica();
 var inModifica = null;
+var vista = "lista";
+var cursore = { y: oggi().getFullYear(), m: oggi().getMonth() };
+var scelto = null;
 
-/* ========== disegno ========== */
+/* ========== totali ========== */
 function disegnaTotale(){
   var alMese = 0;
-  dati.forEach(function(v){ alMese += (v.importo || 0) * (AL_MESE[v.ciclo] || 0); });
+  dati.forEach(function(v){ alMese += (v.importo||0) * (AL_MESE[v.ciclo]||0); });
 
-  var testo = alMese.toLocaleString("it-IT", {minimumFractionDigits:2, maximumFractionDigits:2});
+  var testo = alMese.toLocaleString("it-IT",{minimumFractionDigits:2,maximumFractionDigits:2});
   var celle = document.getElementById("celle");
   celle.innerHTML = "";
   testo.split("").forEach(function(ch){
@@ -393,56 +418,167 @@ function disegnaTotale(){
   eur.className = "cella eur"; eur.textContent = "EUR";
   celle.appendChild(eur);
 
-  document.getElementById("annuo").textContent = euro(alMese * 12);
+  document.getElementById("annuo").textContent = euro(alMese*12);
   document.getElementById("conta").textContent = dati.length + (dati.length === 1 ? " voce" : " voci");
+  document.getElementById("mese").textContent = euro(totaleMese(oggi().getFullYear(), oggi().getMonth()));
+}
 
-  var m = oggi().getMonth(), y = oggi().getFullYear(), restante = 0;
-  dati.forEach(function(v){
-    var d = prossima(v);
-    if(d.getMonth() === m && d.getFullYear() === y) restante += (v.importo || 0);
-  });
-  document.getElementById("mese").textContent = euro(restante);
+function totaleMese(y,m){
+  var da = new Date(y,m,1), a = new Date(y,m+1,0), t = 0;
+  dati.forEach(function(v){ t += occorrenze(v,da,a).length * (v.importo||0); });
+  return t;
+}
+
+/* ========== elenco ========== */
+function rigaVoce(v, d, conGiorni){
+  var b = document.createElement("button");
+  var gg = giorniA(d);
+  b.className = "riga" + (conGiorni && gg <= 3 && gg >= 0 ? " urgente" : "");
+
+  var meta;
+  if(!conGiorni){
+    meta = CICLI[v.ciclo] + (v.metodo ? " · " + v.metodo : "");
+  } else if(gg === 0){ meta = dataBreve(d) + ' · <span class="oggi">OGGI</span>'; }
+  else if(gg === 1){ meta = dataBreve(d) + ' · <span class="gg">domani</span>'; }
+  else if(gg <= 3){ meta = dataBreve(d) + ' · <span class="gg">tra ' + gg + ' gg</span>'; }
+  else { meta = dataBreve(d) + " · tra " + gg + " gg"; }
+
+  b.innerHTML =
+    '<span class="sigla" style="color:'+coloreDa(v.nome)+';background:'+coloreDa(v.nome)+'14">'+
+      v.nome.trim().charAt(0).toUpperCase()+
+    '</span>'+
+    '<span><span class="nome"></span><span class="meta">'+meta+'</span></span>'+
+    '<span class="cifra">'+euro(v.importo||0)+
+      (conGiorni ? '<small>'+CICLI[v.ciclo]+'</small>' : '')+'</span>';
+
+  b.querySelector(".nome").textContent = v.nome;
+  b.addEventListener("click", function(){ apri(v.id); });
+  return b;
 }
 
 function disegnaLista(){
   var lista = document.getElementById("lista");
   lista.innerHTML = "";
-
   if(!dati.length){
-    lista.innerHTML = '<div class="vuoto"><p>Nessun abbonamento registrato.</p>' +
+    lista.innerHTML = '<div class="vuoto"><p>Nessun abbonamento registrato.</p>'+
       '<span>Aggiungi Netflix, Spotify o qualsiasi altra spesa che si ripete.</span></div>';
     return;
   }
-
-  var ord = dati.slice().sort(function(a,b){ return prossima(a) - prossima(b); });
-
-  ord.forEach(function(v){
-    var d = prossima(v), gg = giorniA(d);
-    var b = document.createElement("button");
-    b.className = "riga" + (gg <= 3 ? " urgente" : "");
-    b.setAttribute("aria-label", v.nome + ", " + euro(v.importo) + ", " + dataBreve(d));
-
-    var quando;
-    if(gg === 0) quando = '<span class="oggi">OGGI</span>';
-    else if(gg === 1) quando = '<span class="gg">domani</span>';
-    else if(gg <= 3) quando = '<span class="gg">tra ' + gg + ' gg</span>';
-    else quando = "tra " + gg + " gg";
-
-    b.innerHTML =
-      '<span class="sigla" style="color:' + coloreDa(v.nome) + ';background:' + coloreDa(v.nome) + '14">' +
-        v.nome.trim().charAt(0).toUpperCase() +
-      '</span>' +
-      '<span><span class="nome"></span>' +
-        '<span class="meta">' + dataBreve(d) + ' · ' + quando + '</span></span>' +
-      '<span class="cifra">' + euro(v.importo || 0) + '<small>' + CICLI[v.ciclo] + '</small></span>';
-
-    b.querySelector(".nome").textContent = v.nome;
-    b.addEventListener("click", function(){ apri(v.id); });
-    lista.appendChild(b);
-  });
+  dati.slice().sort(function(a,b){ return prossima(a) - prossima(b); })
+      .forEach(function(v){ lista.appendChild(rigaVoce(v, prossima(v), true)); });
 }
 
-function disegna(){ disegnaTotale(); disegnaLista(); }
+/* ========== calendario ========== */
+function disegnaCalendario(){
+  var y = cursore.y, m = cursore.m;
+  document.getElementById("meseNome").textContent = MESI[m] + " " + y;
+  document.getElementById("meseTot").textContent = euro(totaleMese(y,m));
+
+  var primo = new Date(y,m,1), ultimo = new Date(y,m+1,0);
+  var quanti = ultimo.getDate();
+  var offset = (primo.getDay() + 6) % 7;   // lunedì = 0
+
+  /* mappa giorno → voci */
+  var mappa = {};
+  dati.forEach(function(v){
+    occorrenze(v, primo, ultimo).forEach(function(d){
+      var k = d.getDate();
+      (mappa[k] = mappa[k] || []).push(v);
+    });
+  });
+
+  var griglia = document.getElementById("griglia");
+  griglia.innerHTML = "";
+
+  for(var i=0;i<offset;i++){
+    var vuota = document.createElement("div");
+    vuota.className = "giorno fuori";
+    griglia.appendChild(vuota);
+  }
+
+  var t = oggi();
+  for(var g=1; g<=quanti; g++){
+    (function(g){
+      var d = new Date(y,m,g);
+      var voci = mappa[g] || [];
+      var b = document.createElement("button");
+      b.className = "giorno" + (d < t ? " passato" : "") + (d.getTime() === t.getTime() ? " corrente" : "");
+      b.setAttribute("aria-pressed", scelto === iso(d) ? "true" : "false");
+      b.setAttribute("aria-label", g + " " + MESI[m] + (voci.length ? ", " + voci.length + " pagamenti" : ""));
+
+      var punti = voci.slice(0,3).map(function(v){
+        return '<i style="background:'+coloreDa(v.nome)+'"></i>';
+      }).join("");
+
+      b.innerHTML = '<span class="num">'+g+'</span><span class="punti">'+punti+'</span>';
+      b.addEventListener("click", function(){
+        scelto = (scelto === iso(d)) ? null : iso(d);
+        disegnaCalendario();
+      });
+      griglia.appendChild(b);
+    })(g);
+  }
+
+  disegnaDettaglio(mappa);
+}
+
+function disegnaDettaglio(mappa){
+  var box = document.getElementById("dettaglio");
+  box.innerHTML = "";
+  if(!scelto){ box.hidden = true; return; }
+  box.hidden = false;
+
+  var d = daIso(scelto);
+  var voci = mappa[d.getDate()] || [];
+
+  var cap = document.createElement("div");
+  cap.className = "cap";
+  cap.innerHTML = '<span class="eyebrow">'+dataLunga(d)+'</span>'+
+    '<span class="eyebrow">'+(voci.length ? euro(voci.reduce(function(s,v){ return s+(v.importo||0); },0)) : "")+'</span>';
+  box.appendChild(cap);
+
+  if(!voci.length){
+    var vu = document.createElement("div");
+    vu.className = "vuoto";
+    vu.innerHTML = '<span>Nessun pagamento in questa data.</span>';
+    box.appendChild(vu);
+    return;
+  }
+  voci.forEach(function(v){ box.appendChild(rigaVoce(v, d, false)); });
+}
+
+function cambiaMese(n){
+  var d = new Date(cursore.y, cursore.m + n, 1);
+  cursore = { y: d.getFullYear(), m: d.getMonth() };
+  scelto = null;
+  disegnaCalendario();
+}
+
+document.getElementById("mesePrec").addEventListener("click", function(){ cambiaMese(-1); });
+document.getElementById("meseSucc").addEventListener("click", function(){ cambiaMese(1); });
+document.getElementById("titoloMese").addEventListener("click", function(){
+  cursore = { y: oggi().getFullYear(), m: oggi().getMonth() };
+  scelto = null;
+  disegnaCalendario();
+});
+
+/* ========== viste ========== */
+function mostraVista(v){
+  vista = v;
+  document.getElementById("vistaLista").hidden = (v !== "lista");
+  document.getElementById("vistaCal").hidden = (v !== "cal");
+  document.getElementById("tabLista").setAttribute("aria-selected", v === "lista");
+  document.getElementById("tabCal").setAttribute("aria-selected", v === "cal");
+  if(v === "cal") disegnaCalendario();
+}
+document.getElementById("tabLista").addEventListener("click", function(){ mostraVista("lista"); });
+document.getElementById("tabCal").addEventListener("click", function(){ mostraVista("cal"); });
+
+function disegna(){
+  disegnaTotale();
+  disegnaLista();
+  if(vista === "cal") disegnaCalendario();
+}
 
 /* ========== scheda ========== */
 var velo = document.getElementById("velo"), scheda = document.getElementById("scheda");
@@ -459,7 +595,7 @@ function apri(id){
   fNome.value = v ? v.nome : "";
   fImporto.value = v ? v.importo : "";
   fCiclo.value = v ? v.ciclo : "mens";
-  fData.value = v ? iso(prossima(v)) : iso(oggi());
+  fData.value = v ? iso(prossima(v)) : (scelto || iso(oggi()));
   fMetodo.value = v && v.metodo ? v.metodo : "";
   fNota.value = v && v.nota ? v.nota : "";
 
@@ -470,20 +606,14 @@ function apri(id){
   velo.classList.add("on");
   requestAnimationFrame(function(){ scheda.classList.add("on"); });
 }
-function chiudi(){
-  scheda.classList.remove("on");
-  velo.classList.remove("on");
-  inModifica = null;
-}
+function chiudi(){ scheda.classList.remove("on"); velo.classList.remove("on"); inModifica = null; }
 
 function scorciatoie(){
   var box = document.getElementById("scorciatoie");
   box.innerHTML = "";
   NOTI.slice(0,12).forEach(function(s){
     var b = document.createElement("button");
-    b.type = "button";
-    b.textContent = s.n;
-    b.style.color = s.c;
+    b.type = "button"; b.textContent = s.n; b.style.color = s.c;
     b.addEventListener("click", function(){
       fNome.value = s.n;
       if(!fImporto.value) fImporto.value = s.i;
@@ -496,8 +626,7 @@ function scorciatoie(){
 
 function messaggio(t){
   var el = document.getElementById("toast");
-  el.textContent = t;
-  el.classList.add("on");
+  el.textContent = t; el.classList.add("on");
   clearTimeout(el._t);
   el._t = setTimeout(function(){ el.classList.remove("on"); }, 2200);
 }
@@ -510,7 +639,7 @@ document.getElementById("btnSalva").addEventListener("click", function(){
   var v = {
     id: inModifica || (Date.now().toString(36) + Math.random().toString(36).slice(2,6)),
     nome: nome,
-    importo: parseFloat(String(fImporto.value).replace(",", ".")) || 0,
+    importo: parseFloat(String(fImporto.value).replace(",",".")) || 0,
     ciclo: fCiclo.value,
     data: fData.value,
     metodo: fMetodo.value.trim(),
@@ -520,11 +649,11 @@ document.getElementById("btnSalva").addEventListener("click", function(){
   if(inModifica){
     var i = dati.findIndex(function(x){ return x.id === inModifica; });
     dati[i] = v;
-  } else {
-    dati.push(v);
-  }
+  } else { dati.push(v); }
+
+  var era = inModifica;
   salva(); disegna(); chiudi();
-  messaggio(inModifica ? "Modifiche salvate" : nome + " aggiunto");
+  messaggio(era ? "Modifiche salvate" : nome + " aggiunto");
 });
 
 btnPagato.addEventListener("click", function(){
@@ -550,52 +679,45 @@ document.getElementById("btnAnnulla").addEventListener("click", chiudi);
 velo.addEventListener("click", chiudi);
 document.addEventListener("keydown", function(e){ if(e.key === "Escape") chiudi(); });
 
-/* ========== calendario .ics ========== */
+/* ========== .ics ========== */
 function scarica(nomeFile, testo, tipo){
-  var blob = new Blob([testo], {type: tipo});
+  var blob = new Blob([testo], {type:tipo});
   var url = URL.createObjectURL(blob);
   var a = document.createElement("a");
   a.href = url; a.download = nomeFile;
   document.body.appendChild(a); a.click();
   setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 1500);
 }
-
 function regola(v){
   if(v.ciclo === "una") return null;
   if(v.ciclo === "sett") return "RRULE:FREQ=WEEKLY";
-  if(v.ciclo === "ann")  return "RRULE:FREQ=YEARLY";
+  if(v.ciclo === "ann") return "RRULE:FREQ=YEARLY";
   var n = PASSI[v.ciclo] || 1;
   return "RRULE:FREQ=MONTHLY" + (n > 1 ? ";INTERVAL=" + n : "");
 }
-
 document.getElementById("btnIcs").addEventListener("click", function(){
   if(!dati.length){ messaggio("Prima aggiungi qualcosa"); return; }
   var ora = new Date().toISOString().replace(/[-:]/g,"").split(".")[0] + "Z";
   var r = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Scadenze//IT","CALSCALE:GREGORIAN","METHOD:PUBLISH"];
-
   dati.forEach(function(v){
     var d = prossima(v), fine = new Date(d.getFullYear(), d.getMonth(), d.getDate()+1);
-    var stringa = function(x){ return iso(x).replace(/-/g,""); };
+    var s = function(x){ return iso(x).replace(/-/g,""); };
     r.push("BEGIN:VEVENT");
     r.push("UID:" + v.id + "@scadenze");
     r.push("DTSTAMP:" + ora);
-    r.push("DTSTART;VALUE=DATE:" + stringa(d));
-    r.push("DTEND;VALUE=DATE:" + stringa(fine));
-    r.push("SUMMARY:" + v.nome + " " + euro(v.importo || 0));
+    r.push("DTSTART;VALUE=DATE:" + s(d));
+    r.push("DTEND;VALUE=DATE:" + s(fine));
+    r.push("SUMMARY:" + v.nome + " " + euro(v.importo||0));
     var desc = CICLI[v.ciclo];
     if(v.metodo) desc += " \\, " + v.metodo;
     if(v.nota) desc += " \\, " + v.nota;
     r.push("DESCRIPTION:" + desc);
     var rr = regola(v);
     if(rr) r.push(rr);
-    r.push("BEGIN:VALARM");
-    r.push("ACTION:DISPLAY");
+    r.push("BEGIN:VALARM","ACTION:DISPLAY");
     r.push("DESCRIPTION:" + v.nome + " si rinnova domani");
-    r.push("TRIGGER:-PT15H");
-    r.push("END:VALARM");
-    r.push("END:VEVENT");
+    r.push("TRIGGER:-PT15H","END:VALARM","END:VEVENT");
   });
-
   r.push("END:VCALENDAR");
   scarica("scadenze.ics", r.join("\r\n"), "text/calendar;charset=utf-8");
   messaggio("Apri il file per importarlo");
@@ -604,13 +726,10 @@ document.getElementById("btnIcs").addEventListener("click", function(){
 /* ========== backup ========== */
 document.getElementById("btnBackup").addEventListener("click", function(){
   if(!dati.length){ messaggio("Niente da salvare"); return; }
-  scarica("scadenze-backup-" + iso(oggi()) + ".json", JSON.stringify(dati, null, 2), "application/json");
+  scarica("scadenze-backup-" + iso(oggi()) + ".json", JSON.stringify(dati,null,2), "application/json");
   messaggio("Backup scaricato");
 });
-
-document.getElementById("btnRipristina").addEventListener("click", function(){
-  document.getElementById("fileIn").click();
-});
+document.getElementById("btnRipristina").addEventListener("click", function(){ document.getElementById("fileIn").click(); });
 document.getElementById("fileIn").addEventListener("change", function(e){
   var f = e.target.files[0];
   if(!f) return;
@@ -625,9 +744,7 @@ document.getElementById("fileIn").addEventListener("change", function(e){
       dati = dati.concat(nuovi);
       salva(); disegna();
       messaggio(nuovi.length + " voci ripristinate");
-    }catch(err){
-      messaggio("File non leggibile");
-    }
+    }catch(err){ messaggio("File non leggibile"); }
     e.target.value = "";
   };
   lettore.readAsText(f);
